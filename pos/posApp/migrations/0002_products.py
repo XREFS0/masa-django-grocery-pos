@@ -1,0 +1,40 @@
+"""
+Developed by MASA
+All Rights Reserved.
+"""
+
+from django.db import migrations, models
+import django.db.models.deletion
+import django.utils.timezone
+
+
+class Migration(migrations.Migration):
+
+    dependencies = [
+        ("posApp", "0001_initial"),
+    ]
+
+    operations = [
+        migrations.CreateModel(
+            name="Products",
+            fields=[
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                    ),
+                ),
+                ("code", models.CharField(max_length=100)),
+                ("name", models.TextField()),
+                ("description", models.TextField()),
+                ("price", models.FloatField(default=0)),
+                ("status", models.IntegerField(default=1)),
+                ("date_added", models.DateTimeField(default=django.utils.timezone.now)),
+                ("date_updated", models.DateTimeField(auto_now=True)),
+                (
+                    "category_id",
+                    models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to="posApp.category"),
+                ),
+            ],
+        ),
+    ]
